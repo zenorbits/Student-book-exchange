@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - Student Book Exchange{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-8 mx-auto text-center">
+        <h1 class="display-4">Find Your Next Book</h1>
+        <p class="lead">Buy and sell textbooks easily within the student community.</p>
+    </div>
+</div>
+
+<div class="row mb-4 bg-white p-3 rounded shadow-sm border">
+    <div class="col-md-4 mb-2 mb-md-0">
+        <input type="text" id="search-input" class="form-control" placeholder="Search by title or author...">
+    </div>
+    <div class="col-md-4 mb-2 mb-md-0">
+        <select id="subject-filter" class="form-select">
+            <option value="">All Subjects</option>
+            <option value="Computer Science">Computer Science</option>
+            <option value="Mathematics">Mathematics</option>
+            <option value="Physics">Physics</option>
+            <option value="Manga">Manga</option>
+            <option value="Novel">Novel</option>
+            <option value="History">History</option>
+            <option value="Engineering">Engineering</option>
+            <option value="Business">Business</option>
+            <option value="Other">Other</option>
+        </select>
+    </div>
+    <div class="col-md-4">
+        <select id="condition-filter" class="form-select">
+            <option value="">Any Condition</option>
+            <option value="New">New</option>
+            <option value="Like New">Like New</option>
+            <option value="Used">Used</option>
+            <option value="Worn">Worn</option>
+        </select>
+    </div>
+</div>
+
+<div class="row" id="listings-grid">
+    <!-- Listings will be loaded here dynamically via JS -->
+    <div class="col-12 text-center">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+</div>
+{% endblock %}

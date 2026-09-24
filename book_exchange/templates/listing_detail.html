@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ book.title }} - Student Book Exchange{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6 mb-4">
+        {% if book.image_path %}
+            <img src="{{ url_for('static', filename=book.image_path) }}" class="img-fluid rounded shadow-sm w-100" style="object-fit: cover; max-height: 500px;" alt="{{ book.title }}">
+        {% else %}
+            <div class="bg-secondary text-white d-flex justify-content-center align-items-center rounded shadow-sm" style="height: 400px; font-size: 1.5rem;">
+                No Image Available
+            </div>
+        {% endif %}
+    </div>
+    <div class="col-md-6">
+        <h1 class="display-5">{{ book.title }}</h1>
+        <h3 class="text-muted mb-4">By {{ book.author }}</h3>
+        
+        <div class="mb-4">
+            <span class="badge bg-primary fs-5">${{ "%.2f"|format(book.price) }}</span>
+            <span class="badge bg-info text-dark fs-6 ms-2">{{ book.subject }}</span>
+            <span class="badge bg-secondary fs-6 ms-2">{{ book.condition }}</span>
+            {% if book.status == 'sold' %}
+                <span class="badge bg-danger fs-6 ms-2">SOLD</span>
+            {% endif %}
+        </div>
+        
+        <h5 class="mt-4">Description</h5>
+        <p class="lead" style="white-space: pre-line;">{{ book.description or "No description provided." }}</p>
+        
+        <div class="card mt-5 border-primary">
+            <div class="card-header bg-primary text-white">
+                Seller Contact Information
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">{{ book.name }}</h5>
+                <p class="card-text">
+                    <strong>Email:</strong> <a href="mailto:{{ book.email }}">{{ book.email }}</a><br>
+                    {% if book.phone %}
+                        <strong>Phone:</strong> <a href="tel:{{ book.phone }}">{{ book.phone }}</a>
+                    {% endif %}
+                </p>
+                <p class="text-muted small mb-2">Posted on {{ book.created_at }}</p>
+                {% if session.get('user_id') and session.get('user_id') != book.user_id %}
+                    <a href="{{ url_for('chat', other_user_id=book.user_id) }}?book_id={{ book.id }}" class="btn btn-success w-100 mt-2">
+                        💬 Message Seller
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+        
+        {% if session.get('user_id') == book.user_id %}
+            <div class="mt-4">
+                <a href="{{ url_for('edit_ad', id=book.id) }}" class="btn btn-warning">Edit Listing</a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

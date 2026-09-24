@@ -1,0 +1,35 @@
+body {
+    background-color: #f8f9fa;
+    color: #000; /* Set text to black */
+    padding-top: 70px; /* Space for fixed navbar */
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+.book-card {
+    transition: transform 0.2s;
+}
+
+.book-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.sold-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #dc3545;
+    z-index: 10;
+}

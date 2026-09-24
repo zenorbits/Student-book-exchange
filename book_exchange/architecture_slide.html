@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flow Chart / Architecture Slide</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap');
+
+        body {
+            background-color: #fbfbfb;
+            margin: 0;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .slide-container {
+            width: 1200px;
+            height: 675px; /* 16:9 aspect ratio */
+            background-color: white;
+            padding: 40px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .slide-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 52px;
+            color: #000;
+            margin-top: 0;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 20px;
+            flex-grow: 1;
+        }
+
+        .card {
+            background-color: #202758;
+            border-radius: 12px;
+            padding: 25px;
+            border: 2px solid #e5e5e5;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .card-title {
+            color: #e6b83f;
+            font-size: 18px;
+            font-weight: 600;
+            margin-top: 0;
+            margin-bottom: 12px;
+        }
+
+        .card-content {
+            color: #d1d5db;
+            font-size: 14px;
+            line-height: 1.5;
+            margin: 0;
+        }
+        
+        .instructions {
+            position: absolute;
+            top: 10px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="instructions">
+        <p>Right-click the slide below and select <strong>"Save image as..."</strong> or take a screenshot.</p>
+    </div>
+
+    <div class="slide-container">
+        <h1 class="slide-title">Flow Chart / Architecture</h1>
+        
+        <div class="grid">
+            <!-- Box 1 -->
+            <div class="card">
+                <h2 class="card-title">System Overview</h2>
+                <p class="card-content">Browser (Bootstrap UI) sends requests to the Flask app, which routes them to auth, listings, and search modules.</p>
+            </div>
+            
+            <!-- Box 2 -->
+            <div class="card">
+                <h2 class="card-title">Core Backend Modules</h2>
+                <p class="card-content">Auth (register/login, hashed passwords) - Listings (CRUD, image upload) - Search & /api/listings JSON endpoint.</p>
+            </div>
+            
+            <!-- Box 3 -->
+            <div class="card">
+                <h2 class="card-title">User Role Architecture</h2>
+                <p class="card-content">Seller: post, edit, delete & mark listings Sold. Buyer: browse, search & filter by subject, author, condition.</p>
+            </div>
+            
+            <!-- Box 4 -->
+            <div class="card">
+                <h2 class="card-title">Technology Stack</h2>
+                <p class="card-content">Flask/Django backend - Jinja2 + Bootstrap 5 + JavaScript frontend - SQLite/MySQL database via database.py.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

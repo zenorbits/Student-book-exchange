@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Architecture Flowchart</title>
+    <style>
+        body {
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: sans-serif;
+        }
+        .container {
+            padding: 40px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .instructions {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="instructions">
+            <p>Right-click the diagram below and select <strong>"Save image as..."</strong> or take a screenshot.</p>
+        </div>
+        
+        <div class="mermaid">
+            %%{init: {'theme': 'base', 'themeVariables': { 'background': '#ffffff'}}}%%
+            graph TD
+                A["Student User<br>(Browser + Bootstrap UI)"] --> B["Flask Application (app.py)<br>(Routes: auth, listings, /api/listings)"]
+                
+                B --> C["Auth Module<br>(Register / Login, password hashing)"]
+                B --> D["Listings Module<br>(Post, edit, delete, mark Sold)"]
+                B --> E["Search & API<br>(/api/listings, filter by subject)"]
+                
+                C --> F["database.py (DB helper)<br>(Connects & queries SQLite / MySQL)"]
+                D --> F
+                E --> F
+                
+                F --> G["book_exchange.db<br>(users + books tables)"]
+                
+                classDef darkBlue fill:#1a237e,stroke:#fff,stroke-width:2px,color:#fff;
+                classDef gold fill:#d4af37,stroke:#fff,stroke-width:2px,color:#000;
+                classDef whiteBg fill:#ffffff,stroke:#ddd,stroke-width:2px,color:#333;
+                
+                class A,F darkBlue;
+                class B,G gold;
+                class C,D,E whiteBg;
+        </div>
+    </div>
+
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+</body>
+</html>
