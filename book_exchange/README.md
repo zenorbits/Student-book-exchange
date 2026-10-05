@@ -1,61 +1,79 @@
-# Book Exchange
+# Student Book Exchange
 
-A minimalist web application for a student book exchange marketplace. This platform allows students to buy, sell, or exchange their used books easily.
+A minimalist, yet powerful web application built to facilitate a student book exchange marketplace. This platform empowers students to buy, sell, or exchange their used academic and non-academic books with ease.
+
+## 🚀 Features
+
+- **User Authentication:** Secure registration, login, and logout functionalities with hashed passwords (using Werkzeug).
+- **Email Verification (OTP):** Two-factor style email verification during registration to ensure genuine student accounts.
+- **Marketplace Browsing & Search:** Browse all available books. Search by title or author, and filter by subject and condition to find exactly what you need.
+- **Dynamic Internal API:** Features an internal API endpoint (`/api/listings`) to fetch and display book data dynamically in JSON format.
+- **Ad Posting & Image Uploads:** Authenticated users can post advertisements for books, including details like title, author, condition, price, and secure image uploads for book covers.
+- **Listing Management:** Dedicated "My Listings" dashboard for users to manage, edit, mark as "Sold", or delete their posted advertisements.
+- **Real-time Interaction:** Connect with other students to negotiate and finalize book exchanges.
 
 ## 🛠 Tech Stack
 
-- **Backend:** Python, Flask
+- **Backend:** Python 3, Flask
 - **Database:** SQLite3
-- **Frontend:** HTML5, Jinja2 Templates, Bootstrap 5 (CDN), Vanilla JavaScript
-- **Security:** Werkzeug (Password Hashing)
-- **Deployment:** WSGI ready (Configuration provided for PythonAnywhere)
-
-## ✨ Features
-
-- **User Authentication:** Secure registration, login, and logout functionalities with hashed passwords.
-- **Browse & Search Listings:** Browse all available books. Search by title or author, and filter by subject and condition.
-- **Dynamic API:** Features an internal API endpoint (`/api/listings`) to fetch book data dynamically in JSON format.
-- **Post Advertisements:** Logged-in users can post ads for books, including details like title, author, condition, price, and an image upload.
-- **Listing Management:** Users have a dedicated "My Listings" dashboard where they can edit their ads, delete them, or mark them as "Sold".
-- **Image Uploads:** Secure image uploading for book covers, stored locally and linked in the database.
-
-## 🚀 How It Works
-
-1. **Database Initialization:** On the first run, the application automatically initializes an SQLite database (`book_exchange.db`) using `schema.sql`. It creates the necessary `users` and `books` tables.
-2. **Authentication:** Users must register for an account. Passwords are encrypted before storing. Access to posting and managing ads requires an active session.
-3. **Fetching Listings:** The homepage displays available books by calling the `/api/listings` endpoint, which queries the database based on optional search and filter parameters.
-4. **Managing Data:** When a user posts a book, it's tied to their `user_id`. Only the owner of a listing can modify or delete it. Uploaded images are secured and saved in the `static/uploads` directory.
+- **Frontend:** HTML5, CSS3, Vanilla JavaScript, Jinja2 Templates, Bootstrap 5 (CDN)
+- **Security & Utilities:** 
+  - Werkzeug (Password Hashing, Secure Filenames)
+  - `python-dotenv` for environment variable management
+  - `smtplib` for email OTP delivery
+- **Deployment:** WSGI ready (Configuration provided for platforms like PythonAnywhere)
 
 ## ⚙️ Setup & Run Instructions
 
 ### Prerequisites
-- Python 3.x installed on your system.
+- Python 3.8+ installed on your system.
 
 ### Installation Steps
 
-1. **Clone or Download the Repository**
-2. **Navigate to the Project Directory:**
+1. **Clone the Repository**
    ```bash
+   git clone <your-repository-url>
    cd book_exchange
    ```
+
+2. **Set up a Virtual Environment (Recommended)**
+   ```bash
+   python -m venv venv
+   # On Windows
+   venv\Scripts\activate
+   # On macOS/Linux
+   source venv/bin/activate
+   ```
+
 3. **Install Dependencies:**
-   Install the required Python packages (Flask and Werkzeug).
    ```bash
    pip install -r requirements.txt
    ```
-4. **Run the Application:**
+
+4. **Environment Variables:**
+   Create a `.env` file in the root directory and add your SMTP configurations for OTP emails:
+   ```env
+   SMTP_SERVER=smtp.gmail.com
+   SMTP_PORT=587
+   SMTP_USERNAME=your_email@gmail.com
+   SMTP_PASSWORD=your_app_password
+   ```
+
+5. **Initialize and Run the Application:**
+   On the first run, the app will automatically initialize the SQLite database (`book_exchange.db`).
    ```bash
    python app.py
    ```
-5. **Access the App:**
+
+6. **Access the App:**
    Open your web browser and navigate to `http://127.0.0.1:5000/`.
 
 ## 📁 Project Structure
 
-- `app.py`: The main Flask application file containing all routes and logic.
+- `app.py`: The main Flask application file containing all routes, business logic, and API endpoints.
 - `database.py`: Helper functions for database connection and initialization.
 - `schema.sql`: SQL script defining the database schema for users and books.
-- `requirements.txt`: Python dependencies.
-- `pythonanywhere_wsgi.py`: WSGI configuration file for deploying on PythonAnywhere.
-- `templates/`: Directory containing all HTML/Jinja2 templates.
-- `static/`: Directory containing static files like CSS, JS, and user-uploaded images (`static/uploads/`).
+- `requirements.txt`: Project dependencies and libraries.
+- `pythonanywhere_wsgi.py`: WSGI configuration file for seamless deployment.
+- `templates/`: Directory containing all HTML views and Jinja2 templates.
+- `static/`: Directory containing static assets (CSS, JS) and user-uploaded images (`static/uploads/`).
